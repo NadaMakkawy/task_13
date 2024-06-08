@@ -38,7 +38,7 @@ class _ClientsOpsPageState extends State<ClientsOpsPage> {
                 controller: nameController,
                 validator: (value) {
                   if (value!.isEmpty || checker(value, ' ')) {
-                    return 'Name is required';
+                    return 'Please enter a valid Name';
                   }
                   return null;
                 },
@@ -75,8 +75,11 @@ class _ClientsOpsPageState extends State<ClientsOpsPage> {
               AppTextFormField(
                 controller: phoneController,
                 validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Phone is required';
+                  if (value!.isEmpty ||
+                      value.length <= 10 ||
+                      value.length > 11 ||
+                      checker(value, ' ')) {
+                    return 'Please enter a valid Phone number';
                   }
                   return null;
                 },
@@ -92,7 +95,7 @@ class _ClientsOpsPageState extends State<ClientsOpsPage> {
                 controller: addressController,
                 validator: (value) {
                   if (value!.isEmpty || checker(value, ' ')) {
-                    return 'Address is required';
+                    return 'Please enter a valid Address';
                   }
                   return null;
                 },
@@ -150,26 +153,3 @@ class _ClientsOpsPageState extends State<ClientsOpsPage> {
 }
 
 bool checker(String value, String check) => value.contains(check);
-
-InputDecoration textFieldDecoration(
-  BuildContext context, {
-  Color? color,
-  required IconData icon,
-  required String label,
-  required String hint,
-}) {
-  return InputDecoration(
-    prefixIcon: Padding(
-      padding: const EdgeInsets.only(right: 10),
-      child: Icon(
-        icon,
-        color: color,
-      ),
-    ),
-    labelText: label,
-    labelStyle: Theme.of(context).textTheme.labelMedium,
-    hintText: hint,
-    hintStyle:
-        Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.grey),
-  );
-}
