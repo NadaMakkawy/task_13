@@ -9,9 +9,6 @@ class AppTextFormField extends StatelessWidget {
   final bool? obsecureBool;
   final int? max;
   final Function(String)? onChanged;
-
-  // final TextEditingController controller;
-  // final String? Function(String?)? validator;
   final String label;
   final String hint;
 
