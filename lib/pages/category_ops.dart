@@ -40,19 +40,26 @@ class _CategoriesOpsPageState extends State<CategoriesOpsPage> {
                     return null;
                   },
                   label: 'Name',
+                  hint: 'Category name',
+                  textInputType: TextInputType.name,
+                  textInputAction: TextInputAction.next,
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 AppTextFormField(
-                    controller: descriptionController,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Description is required';
-                      }
-                      return null;
-                    },
-                    label: 'Description'),
+                  controller: descriptionController,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Description is required';
+                    }
+                    return null;
+                  },
+                  label: 'Description',
+                  hint: 'Category description',
+                  textInputType: TextInputType.text,
+                  textInputAction: TextInputAction.done,
+                ),
                 const SizedBox(
                   height: 20,
                 ),

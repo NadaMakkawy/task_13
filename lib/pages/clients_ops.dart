@@ -37,25 +37,38 @@ class _ClientsOpsPageState extends State<ClientsOpsPage> {
               AppTextFormField(
                 controller: nameController,
                 validator: (value) {
-                  if (value!.isEmpty) {
+                  if (value!.isEmpty || checker(value, ' ')) {
                     return 'Name is required';
                   }
                   return null;
                 },
                 label: 'Name',
+                hint: 'nada mostafa',
+                textInputType: TextInputType.name,
+                textInputAction: TextInputAction.next,
               ),
               const SizedBox(
                 height: 20,
               ),
               AppTextFormField(
-                  controller: emailController,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Email is required';
-                    }
-                    return null;
-                  },
-                  label: 'Email'),
+                controller: emailController,
+                autoCorrectBool: true,
+                textInputAction: TextInputAction.next,
+                textInputType: TextInputType.emailAddress,
+                validator: (value) {
+                  if (value!.isEmpty ||
+                      !checker(value, '@') ||
+                      !checker(value, '.com') ||
+                      !checker(value, 'gmail') &&
+                          !checker(value, 'yahoo') &&
+                          !checker(value, 'hotmail')) {
+                    return 'Please enter a valid Email Adress';
+                  }
+                  return null;
+                },
+                label: 'Email',
+                hint: 'email@adress.com',
+              ),
               const SizedBox(
                 height: 20,
               ),
@@ -68,6 +81,9 @@ class _ClientsOpsPageState extends State<ClientsOpsPage> {
                   return null;
                 },
                 label: 'Phone',
+                hint: '01231231231',
+                textInputType: TextInputType.phone,
+                textInputAction: TextInputAction.next,
               ),
               const SizedBox(
                 height: 20,
@@ -75,12 +91,15 @@ class _ClientsOpsPageState extends State<ClientsOpsPage> {
               AppTextFormField(
                 controller: addressController,
                 validator: (value) {
-                  if (value!.isEmpty) {
+                  if (value!.isEmpty || checker(value, ' ')) {
                     return 'Address is required';
                   }
                   return null;
                 },
                 label: 'Address',
+                hint: '24 address st.',
+                textInputType: TextInputType.streetAddress,
+                textInputAction: TextInputAction.done,
               ),
               const SizedBox(
                 height: 20,
@@ -128,4 +147,29 @@ class _ClientsOpsPageState extends State<ClientsOpsPage> {
       );
     }
   }
+}
+
+bool checker(String value, String check) => value.contains(check);
+
+InputDecoration textFieldDecoration(
+  BuildContext context, {
+  Color? color,
+  required IconData icon,
+  required String label,
+  required String hint,
+}) {
+  return InputDecoration(
+    prefixIcon: Padding(
+      padding: const EdgeInsets.only(right: 10),
+      child: Icon(
+        icon,
+        color: color,
+      ),
+    ),
+    labelText: label,
+    labelStyle: Theme.of(context).textTheme.labelMedium,
+    hintText: hint,
+    hintStyle:
+        Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.grey),
+  );
 }
